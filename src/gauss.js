@@ -13,11 +13,15 @@ $(document).ready(function () {
     });
 
     $('body').append('<h2>with pivoting</h2>');
+    var t0 = performance.now();
     $('body').append(JSON.stringify(gaussWithPivoting(A1), null, 4));
+    var t1 = performance.now();
+    $('body').append('<p>Call to gaussWithPivoting took ' + (t1 - t0) + ' milliseconds.</p>');
     $('body').append('<h2>without pivoting</h2>');
+    var t0 = performance.now();
     $('body').append(JSON.stringify(gaussWithoutPivoting(A2), null, 4));
-
-
+    var t1 = performance.now();
+    $('body').append('<p>Call to gaussWithoutPivoting took ' + (t1 - t0) + ' milliseconds.</p>');
 });
 
 /** Solve a linear system of equations given by a n&times;n matrix
@@ -27,30 +31,30 @@ function gaussWithPivoting(A) {
 
     for (var i=0; i<n; i++) {
         // Search for maximum in this column
-        var maxEl = Math.abs(A[i][i]);
+        var maxEl = Math.abs(parseFloat(A[i][i].toFixed(16)));
         var maxRow = i;
         for(var k=i+1; k<n; k++) {
-            if (Math.abs(A[k][i]) > maxEl) {
-                maxEl = Math.abs(A[k][i]);
+            if (Math.abs(parseFloat(A[k][i].toFixed(16))) > maxEl) {
+                maxEl = Math.abs(parseFloat(A[k][i].toFixed(16)));
                 maxRow = k;
             }
         }
 
         // Swap maximum row with current row (column by column)
         for (var k=i; k<n+1; k++) {
-            var tmp = A[maxRow][k];
-            A[maxRow][k] = A[i][k];
+            var tmp = parseFloat(A[maxRow][k].toFixed(16));
+            A[maxRow][k] = parseFloat(A[i][k].toFixed(16));
             A[i][k] = tmp;
         }
 
         // Make all rows below this one 0 in current column
         for (k=i+1; k<n; k++) {
-            var c = -A[k][i]/A[i][i];
+            var c = -parseFloat(A[k][i].toFixed(16))/parseFloat(A[i][i].toFixed(16));
             for(var j=i; j<n+1; j++) {
                 if (i==j) {
                     A[k][j] = 0;
                 } else {
-                    A[k][j] += c * A[i][j];
+                    A[k][j] += c * parseFloat(A[i][j].toFixed(16));
                 }
             }
         }
@@ -59,11 +63,12 @@ function gaussWithPivoting(A) {
     // Solve equation Ax=b for an upper triangular matrix A
     var x= new Array(n);
     for (var i=n-1; i>-1; i--) {
-        x[i] = A[i][n]/A[i][i];
+        x[i] = parseFloat(A[i][n].toFixed(16))/parseFloat(A[i][i].toFixed(16));
         for (var k=i-1; k>-1; k--) {
-            A[k][n] -= A[k][i] * x[i];
+            A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
     }
+
     return x;
 }
 
@@ -75,12 +80,12 @@ function gaussWithoutPivoting(A) {
     for (var i=0; i<n; i++) {
         // Make all rows below this one 0 in current column
         for (k=i+1; k<n; k++) {
-            var c = -A[k][i]/A[i][i];
+            var c = -parseFloat(A[k][i].toFixed(16))/parseFloat(A[i][i].toFixed(16));
             for(var j=i; j<n+1; j++) {
                 if (i==j) {
                     A[k][j] = 0;
                 } else {
-                    A[k][j] += c * A[i][j];
+                    A[k][j] += c * parseFloat(A[i][j].toFixed(16));
                 }
             }
         }
@@ -89,10 +94,11 @@ function gaussWithoutPivoting(A) {
     // Solve equation Ax=b for an upper triangular matrix A
     var x= new Array(n);
     for (var i=n-1; i>-1; i--) {
-        x[i] = A[i][n]/A[i][i];
+        x[i] = parseFloat(A[i][n].toFixed(16))/parseFloat(A[i][i].toFixed(16));
         for (var k=i-1; k>-1; k--) {
-            A[k][n] -= A[k][i] * x[i];
+            A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
     }
+
     return x;
 }
