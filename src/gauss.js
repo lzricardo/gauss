@@ -33,12 +33,12 @@ $(document).ready(function () {
         return arr.slice();
     });
 
-    $('body').append('<h2>with pivoting</h2>');
+    $('body').append('<h2>With pivoting</h2>');
     var t0 = performance.now();
     $('body').append(JSON.stringify(gaussWithPivoting(A1), null, 4));
     var t1 = performance.now();
     $('body').append('<p>Call to gaussWithPivoting took ' + (t1 - t0) + ' milliseconds.</p>');
-    $('body').append('<h2>without pivoting</h2>');
+    $('body').append('<h2>Without pivoting</h2>');
     var t0 = performance.now();
     $('body').append(JSON.stringify(gaussWithoutPivoting(A2), null, 4));
     var t1 = performance.now();
