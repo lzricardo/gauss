@@ -7,7 +7,7 @@ $(document).ready(function () {
         [3, -21, -8, -4, 5, -5]
     ];
 
-    //Example presentation
+    // Example presentation
     // var A1 = [
     //     [1, 2, 1, 3],
     //     [2, 1, -1, 0],
@@ -86,6 +86,7 @@ function gaussWithPivoting(A) {
         for (var k=i-1; k>-1; k--) {
             A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
+        x[i] = _fixZero(x[i]);
     }
 
     return x;
@@ -115,7 +116,15 @@ function gaussWithoutPivoting(A) {
         for (var k=i-1; k>-1; k--) {
             A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
+        x[i] = _fixZero(x[i]);
     }
 
     return x;
+}
+
+function _fixZero(number) {
+    var number = number.toString();
+    var decimals = number.substring(number.indexOf(".") + 1, number.length);
+
+    return (decimals.length == 16 || decimals.length < 15) ? number : number + "0";
 }
