@@ -86,7 +86,8 @@ function gaussWithPivoting(A) {
         for (var k=i-1; k>-1; k--) {
             A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
-        x[i] = _fixZero(x[i]);
+
+        x[i] = _fixZero(x[i].toFixed(16));
     }
 
     return x;
@@ -116,7 +117,8 @@ function gaussWithoutPivoting(A) {
         for (var k=i-1; k>-1; k--) {
             A[k][n] -= parseFloat(A[k][i].toFixed(16)) * parseFloat(x[i].toFixed(16));
         }
-        x[i] = _fixZero(x[i]);
+
+        x[i] = _fixZero(x[i].toFixed(16));
     }
 
     return x;
