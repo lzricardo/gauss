@@ -45,8 +45,6 @@ $(document).ready(function () {
     $('body').append('<p>Call to gaussWithoutPivoting took ' + (t1 - t0) + ' milliseconds.</p>');
 });
 
-/** Solve a linear system of equations given by a n&times;n matrix
- with a result vector n&times;1. */
 function gaussWithPivoting(A) {
     var n = A.length;
 
@@ -93,8 +91,6 @@ function gaussWithPivoting(A) {
     return x;
 }
 
-/** Solve a linear system of equations given by a n&times;n matrix
- with a result vector n&times;1. */
 function gaussWithoutPivoting(A) {
     var n = A.length;
 
