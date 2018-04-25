@@ -7,6 +7,20 @@ $(document).ready(function () {
         [3, -21, -8, -4, 5, -5]
     ];
 
+    //Print matrix
+    $('body').append('<h2>Augmented matrix</h2>');
+    for (var i = 0; i < A1.length; i++) {
+        for (var j = 0; j < A1[i].length; j++) {
+            if (j == A1[i].length - 2) {
+                $('body').append(A1[i][j] + '| ');
+            } else {
+                $('body').append(A1[i][j] + ' ');
+            }
+        }
+
+        $('body').append('<br>');
+    }
+
     //copy matrix
     var A2 = A1.map(function(arr) {
         return arr.slice();
